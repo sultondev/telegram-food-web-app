@@ -158,7 +158,7 @@ export const menuList = [
 				"updated_at": "2024-03-13 04:59:39",
 				"price": 8000,
 				"description": null,
-				"image": null
+			"image": null
 			}
 		]
 	},

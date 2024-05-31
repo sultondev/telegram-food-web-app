@@ -4,5 +4,8 @@ import {primeVue} from "./prime-vue";
 
 export const modules: NuxtConfig['modules'] = [
 	tailwindcss,
-	primeVue
+	primeVue,
+	'@nuxt/image',
+	'nuxt-icon',
+	'@pinia/nuxt'
 ]

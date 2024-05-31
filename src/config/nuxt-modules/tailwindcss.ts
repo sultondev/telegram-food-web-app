@@ -3,7 +3,7 @@ import type { NuxtConfig } from 'nuxt/config'
 
 export const tailwindsOptions: ModuleOptions = {
 	cssPath: ['src/styles/main.css', { injectPosition: 'first' }],
-	configPath: 'tailwind.config.ts',
+	configPath: 'tailwindcss.config.ts',
 	exposeConfig: {
 		level: 2,
 	},
