@@ -99,9 +99,10 @@ const products = computed(() => {
           </div>
         </div>
 
-      <Dialog v-model:visible="visible" modal header="Окно" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
-<!--        <NuxtImg  />-->
-
+      <Dialog v-model:visible="visible" modal :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+        <template #header>
+        <NuxtImg src="/img/complete.webp" class="w-[40px] h-[40px]"  />
+        </template>
         <div class='completeText'>
           <p class="mb-2">Спасибо за заказ!🤗</p>
           <p class="mb-2">Оператор свяжется с вами для подтверждения заказа.</p>
