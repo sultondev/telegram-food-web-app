@@ -3,9 +3,7 @@
 </script>
 
 <template>
-  <div class="">
-    <h1 class="text-white text-base text-right bg-black w-fit ml-auto py-2 px-4 rounded-lg">
-      Oppa chicken
-    </h1>
+  <div class="w-full flex justify-end">
+    <NuxtImg src="/img/logo.webp" class="w-[134px] h-[81px] rounded-lg" />
   </div>
 </template>

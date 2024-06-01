@@ -55,17 +55,19 @@ function sendOrder () {
           <span class="">Общая сумма</span>
           <span class="text-orange-500">UZS {{maskedSummary}}</span>
         </div>
-        <Button @click="sendOrder" :unstyled="true" class="w-1/2 bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
+        <Button @click="visible = true" :unstyled="true" class="w-1/2 bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
           Заказать
         </Button>
       </div>
 
       <div class="card flex justify-content-center">
-        <Dialog v-model:visible="visible" modal header="Header" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+        <Dialog v-model:visible="visible" modal header="Окно" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
           <p class="mb-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Вы подтверждаете что хотите заказать?
           </p>
+          <Button @click="sendOrder" :unstyled="true" class="w-full bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
+            Заказать
+          </Button>
         </Dialog>
       </div>
   </div>
