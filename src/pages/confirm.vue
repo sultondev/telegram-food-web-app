@@ -33,11 +33,15 @@ const body = computed(() => {
 })
 const paymentType = ref('cash')
 async function sendOrder () {
-  const { data } = await useApiFetch<any>('/api/cart', {
-    method: 'POST',
-    body
-  })
+  // const { data } = await useApiFetch<any>('/api/cart', {
+  //   method: 'POST',
+  //   body
+  // })
   visible.value = true
+
+  setTimeout(() => {
+    window.Telegram.WebApp.sendData(JSON.stringify(cartSendData.value));
+  },2000)
 }
 
 const closeModal = () => {
