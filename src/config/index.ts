@@ -8,7 +8,9 @@ export const config: NuxtConfig = {
 
 	app: {
 		head: {
-			script: [...noScripts]
+			script: [{
+				src: 'https://telegram.org/js/telegram-web-app.js'
+			}]
 		},
 	},
 
