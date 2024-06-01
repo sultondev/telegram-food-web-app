@@ -41,7 +41,7 @@ async function sendOrder () {
   setTimeout(() => {
     store.resetAll()
     navigateTo('/')
-  },5000)
+  },3000)
 }
 
 const products = computed(() => {
