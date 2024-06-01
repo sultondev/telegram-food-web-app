@@ -38,10 +38,11 @@ async function sendOrder () {
     body
   })
   visible.value = true
-  setTimeout(() => {
+}
+
+const closeModal = () => {
     store.resetAll()
     navigateTo('/')
-  },3000)
 }
 
 const products = computed(() => {
@@ -102,8 +103,14 @@ const products = computed(() => {
 <!--        <NuxtImg  />-->
 
         <div class='completeText'>
-          <p>Спасибо за заказ!🤗</p>
-          <p>Оператор свяжется с вами для подтверждения заказа.</p>
+          <p class="mb-2">Спасибо за заказ!🤗</p>
+          <p class="mb-2">Оператор свяжется с вами для подтверждения заказа.</p>
+          <Button
+              @click="closeModal"
+              :unstyled="true"
+            class="w-full bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
+          OK
+          </Button>
         </div>
       </Dialog>
     </Container>
