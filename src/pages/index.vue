@@ -8,15 +8,31 @@ import {maskNumber} from "~/utils";
 
 const config = useRuntimeConfig()
 const store = useCartStore()
-const { cartSummaryPrice } = storeToRefs(store)
+const { cartSummaryPrice, cartData } = storeToRefs(store)
 const maskedSummary = computed(() => maskNumber(cartSummaryPrice.value))
 
 const { data } = await useApiFetch<MenuListInterface<ProductItem>[]>('/api/menu')
 const menuList = ref(data.value)
 
 const selectedBar = ref<number | null>(null)
+const visible = ref(false)
 if(data.value) {
   selectedBar.value = data.value[0].id
+}
+
+function sendOrder () {
+  const cartKeys = Object.keys(cartData.value).map((item) => {
+    const instance = {[item]: cartData.value[item]}
+    if(instance[item] !== 0) {
+      return instance
+    }
+  }).filter(item => item !== undefined)
+
+  console.log({
+    chatId: window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || null,
+    cart: cartKeys
+  })
+  visible.value = true
 }
 </script>
 
@@ -39,9 +55,18 @@ if(data.value) {
           <span class="">Общая сумма</span>
           <span class="text-orange-500">UZS {{maskedSummary}}</span>
         </div>
-        <Button :unstyled="true" class="w-1/2 bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer justify-center">
+        <Button @click="sendOrder" :unstyled="true" class="w-1/2 bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
           Заказать
         </Button>
+      </div>
+
+      <div class="card flex justify-content-center">
+        <Dialog v-model:visible="visible" modal header="Header" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+          <p class="mb-5">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </Dialog>
       </div>
   </div>
 </template>

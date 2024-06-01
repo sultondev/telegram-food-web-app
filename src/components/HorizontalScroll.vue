@@ -28,7 +28,7 @@ const menuList = computed(() => {
 </script>
 
 <template>
-  <ul class="overflow-x-scroll no-scrollbar flex gap-8 scroll">
+  <ul class="overflow-x-scroll no-scrollbar flex gap-8 text-nowrap scroll">
     <li v-for="item in menuList" :class="item.classes" @click="setItem(item)">
       {{item.label}}
     </li>
