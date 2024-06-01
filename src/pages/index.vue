@@ -10,38 +10,15 @@ const store = useCartStore()
 const { cartSummaryPrice, cartData } = storeToRefs(store)
 const maskedSummary = computed(() => maskNumber(cartSummaryPrice.value))
 
-const { data } = await useApiFetch<MenuListInterface<ProductItem>[]>('/api/menu')
+const { data } = await useApiFetch<MenuListInterface<ProductItem[]>[]>('/api/menu')
 const menuList = ref(data.value)
 
 const selectedBar = ref<number | null>(null)
-const visible = ref(false)
-const cartSendData = computed(() => {
-  return Object.keys(cartData.value).map((item) => {
-    const instance = {[item]: cartData.value[item]}
-    if(instance[item] !== 0) {
-      return instance
-    }
-  }).filter(item => item !== undefined)
-})
 
-const body = computed(() => {
-  return {
-    chatId: window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || null,
-    cart: cartSendData.value
-  }
-})
 if(data.value) {
   selectedBar.value = data.value[0].id
 }
 
-async function sendOrder () {
-  const { data } = await useApiFetch<any>('/api/cart', {
-    method: 'POST',
-    body
-  })
-  console.log(data)
-  visible.value = true
-}
 </script>
 
 <template>
@@ -63,20 +40,9 @@ async function sendOrder () {
           <span class="">Общая сумма</span>
           <span class="text-orange-500">UZS {{maskedSummary}}</span>
         </div>
-        <Button @click="visible = true" :unstyled="true" class="w-1/2 bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
+        <NuxtLink to="/confirm" :unstyled="true" class="w-1/2 bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
           Заказать
-        </Button>
-      </div>
-
-      <div class="card flex justify-content-center">
-        <Dialog v-model:visible="visible" modal header="Окно" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
-          <p class="mb-5">
-            Вы подтверждаете что хотите заказать?
-          </p>
-          <Button @click="sendOrder" :unstyled="true" class="w-full bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
-            Заказать
-          </Button>
-        </Dialog>
+        </NuxtLink>
       </div>
   </div>
 </template>
