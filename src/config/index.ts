@@ -9,7 +9,7 @@ export const config: NuxtConfig = {
 	app: {
 		head: {
 			script: [...noScripts]
-		}
+		},
 	},
 
 	runtimeConfig: {
