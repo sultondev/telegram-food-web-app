@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {maskNumber} from "~/utils";
 import {useCartStore} from "~/store/cart-store";
 
 type ProductItem = {

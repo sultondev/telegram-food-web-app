@@ -4,7 +4,6 @@ import type {MenuListInterface} from "~/types/interfaces";
 import type {ProductItem} from "~/types/types";
 import SearchResultWrapper from "~/components/SearchResultWrapper.vue";
 import {useCartStore} from "~/store/cart-store";
-import {maskNumber} from "~/utils";
 
 const config = useRuntimeConfig()
 const store = useCartStore()
@@ -16,22 +15,31 @@ const menuList = ref(data.value)
 
 const selectedBar = ref<number | null>(null)
 const visible = ref(false)
-if(data.value) {
-  selectedBar.value = data.value[0].id
-}
-
-function sendOrder () {
-  const cartKeys = Object.keys(cartData.value).map((item) => {
+const cartSendData = computed(() => {
+  return Object.keys(cartData.value).map((item) => {
     const instance = {[item]: cartData.value[item]}
     if(instance[item] !== 0) {
       return instance
     }
   }).filter(item => item !== undefined)
+})
 
-  console.log({
+const body = computed(() => {
+  return {
     chatId: window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || null,
-    cart: cartKeys
+    cart: cartSendData.value
+  }
+})
+if(data.value) {
+  selectedBar.value = data.value[0].id
+}
+
+async function sendOrder () {
+  const { data } = await useApiFetch<any>('/api/cart', {
+    method: 'POST',
+    body
   })
+  console.log(data)
   visible.value = true
 }
 </script>

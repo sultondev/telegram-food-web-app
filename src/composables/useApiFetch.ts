@@ -1,5 +1,5 @@
 import type { UseFetchOptions } from 'nuxt/app'
-// import { defu } from 'defu'
+import { defu } from 'defu'
 
 export async function useApiFetch<T>(url: string, options: UseFetchOptions<T> = {}) {
 	const config = useRuntimeConfig()
@@ -19,6 +19,6 @@ export async function useApiFetch<T>(url: string, options: UseFetchOptions<T> = 
 
 
 	// just merge, assign  options
-	const params = defaults
+	const params = defu(options, defaults)
 	return useFetch(url, params);
 }
