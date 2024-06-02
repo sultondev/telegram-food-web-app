@@ -76,7 +76,7 @@ const products = computed(() => {
                 <MenuListItem v-for="item in products" :key="item.id+'23Udasb'" :product="item" />
               </div>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap mb-3 gap-3">
                 <div class="flex align-items-center">
                   <RadioButton v-model="paymentType" inputId="paymentType2" name="Наличные" value="cash" />
                   <label for="paymentType2" class="ml-2">Наличные</label>
@@ -86,7 +86,10 @@ const products = computed(() => {
                   <RadioButton v-model="paymentType"  inputId="paymentType1" name="Пластиковое карта" value="card" />
                   <label for="paymentType1" class="ml-2">Пластиковое карта</label>
                 </div>
-
+            </div>
+            <div class="flex w-1/2 flex-col font-bold mb-3">
+              <span class="">Общая сумма</span>
+              <span class="text-orange-500">UZS {{maskedSummary}}</span>
             </div>
             <p class="mb-5">
               Вы подтверждаете что хотите заказать?

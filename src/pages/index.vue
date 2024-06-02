@@ -18,7 +18,6 @@ const selectedBar = ref<number | null>(null)
 if(data.value) {
   selectedBar.value = data.value[0].id
 }
-const chatId = ref(window?.Telegram?.WebApp?.initDataUnsafe)
 
 </script>
 
@@ -45,8 +44,5 @@ const chatId = ref(window?.Telegram?.WebApp?.initDataUnsafe)
           Заказать
         </NuxtLink>
       </div>
-    {{
-      chatId
-    }}
   </div>
 </template>
