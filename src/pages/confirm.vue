@@ -113,12 +113,12 @@ const products = computed(() => {
         <div class='completeText'>
           <p class="mb-2">Спасибо за заказ!🤗</p>
           <p class="mb-2">Оператор свяжется с вами для подтверждения заказа.</p>
-          <Button
-              @click="closeModal"
-              :unstyled="true"
-            class="w-full bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
-          OK
-          </Button>
+<!--          <Button-->
+<!--              @click="closeModal"-->
+<!--              :unstyled="true"-->
+<!--            class="w-full bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">-->
+<!--          OK-->
+<!--          </Button>-->
         </div>
       </Dialog>
     </Container>
