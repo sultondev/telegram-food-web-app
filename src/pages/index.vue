@@ -11,7 +11,7 @@ type RouteQueryData = {
 
 const config = useRuntimeConfig()
 const store = useCartStore()
-const { cartSummaryPrice, cartData } = storeToRefs(store)
+const { cartSummaryPrice, cartData, paymentType } = storeToRefs(store)
 const maskedSummary = computed(() => maskNumber(cartSummaryPrice.value))
 const route = useRoute()
 
@@ -24,7 +24,7 @@ if(data.value) {
   selectedBar.value = data.value[0].id
 }
 
-if(route?.query?.cart && route?.query?.cart.length > 4 && data.value) {
+if(route?.query?.cart && route?.query?.cart.length > 4 && data.value && route.query.payment) {
   const queryData = JSON.parse(route.query.cart as string)
   cartData.value = Object.assign({}, ...queryData)
   const routeSelectedCart = Object.keys(cartData.value).map(Number)
@@ -35,6 +35,7 @@ if(route?.query?.cart && route?.query?.cart.length > 4 && data.value) {
     return accum
   }, 0)
   cartSummaryPrice.value = totalPrice
+  paymentType.value = route.query.payment as string || 'card'
 }
 
 </script>

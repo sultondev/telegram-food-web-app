@@ -8,6 +8,7 @@ import {defineStore} from "pinia";
 export const useCartStore = defineStore('cart', () => {
 	const cartData = ref<{ [key: string]: number }>({})
 	const cartSummaryPrice = ref(0)
+	const paymentType = ref('cash')
 	function addCart(field: number, count: number) {
 		cartData.value[field] = count
 	}
@@ -21,6 +22,7 @@ export const useCartStore = defineStore('cart', () => {
 		cartData,
 		addCart,
 		cartSummaryPrice,
-		resetAll
+		resetAll,
+		paymentType
 	}
 })

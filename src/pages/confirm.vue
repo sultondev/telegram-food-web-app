@@ -10,7 +10,7 @@ const { data } = await useApiFetch<MenuListInterface<ProductItem[]>[]>('/api/men
 const menuList = ref(data.value||[])
 
 const store = useCartStore()
-const { cartSummaryPrice, cartData } = storeToRefs(store)
+const { cartSummaryPrice, cartData, paymentType } = storeToRefs(store)
 const maskedSummary = computed(() => maskNumber(cartSummaryPrice.value))
 
 const selectedCarts = computed(() => {
@@ -31,7 +31,7 @@ const body = computed(() => {
     cart: cartSendData.value
   }
 })
-const paymentType = ref('cash')
+
 async function sendOrder () {
   // const { data } = await useApiFetch<any>('/api/cart', {
   //   method: 'POST',
