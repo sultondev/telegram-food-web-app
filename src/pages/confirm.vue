@@ -40,7 +40,7 @@ async function sendOrder () {
   visible.value = true
 
   setTimeout(() => {
-    window.Telegram.WebApp.sendData(JSON.stringify(cartSendData.value));
+    window.Telegram.WebApp.sendData(JSON.stringify({cart: cartSendData.value, payment: paymentType.value}));
   },2000)
 }
 

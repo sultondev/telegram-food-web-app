@@ -5,10 +5,15 @@ import type {ProductItem} from "~/types/types";
 import SearchResultWrapper from "~/components/SearchResultWrapper.vue";
 import {useCartStore} from "~/store/cart-store";
 
+type RouteQueryData = {
+  [key: string]: number
+}
+
 const config = useRuntimeConfig()
 const store = useCartStore()
 const { cartSummaryPrice, cartData } = storeToRefs(store)
 const maskedSummary = computed(() => maskNumber(cartSummaryPrice.value))
+const route = useRoute()
 
 const { data } = await useApiFetch<MenuListInterface<ProductItem[]>[]>('/api/menu')
 const menuList = ref(data.value)
@@ -17,6 +22,19 @@ const selectedBar = ref<number | null>(null)
 
 if(data.value) {
   selectedBar.value = data.value[0].id
+}
+
+if(route?.query?.cart && route?.query?.cart.length > 4 && data.value) {
+  const queryData = JSON.parse(route.query.cart as string)
+  cartData.value = Object.assign({}, ...queryData)
+  const routeSelectedCart = Object.keys(cartData.value).map(Number)
+  const totalPrice = data.value.flatMap((item) => item.products).filter((item)=> {
+    return routeSelectedCart.includes(item.id)
+  }).reduce((accum, item, idx) => {
+    accum += item.price * cartData.value[item.id]
+    return accum
+  }, 0)
+  cartSummaryPrice.value = totalPrice
 }
 
 </script>
