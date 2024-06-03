@@ -110,9 +110,9 @@ const products = computed(() => {
         <template #header>
         <NuxtImg src="/img/complete.webp" class="w-[40px] h-[40px]"  />
         </template>
-        <div class='completeText'>
-          <p class="mb-2">Спасибо за заказ!🤗</p>
-          <p class="mb-2">Оператор свяжется с вами для подтверждения заказа.</p>
+        <div class=''>
+          <p class="mb-2 text-2xl text-center">Спасибо за заказ!🤗</p>
+<!--          <p class="mb-2">Оператор свяжется с вами для подтверждения заказа.</p>-->
 <!--          <Button-->
 <!--              @click="closeModal"-->
 <!--              :unstyled="true"-->
