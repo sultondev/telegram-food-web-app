@@ -1,17 +1,21 @@
 <script setup lang="ts">
 
-import {menuList} from "~/constants";
+import type {MenuListInterface} from "~/types/interfaces";
+import type {ProductItem} from "~/types/types";
 
+interface Props {
+  menuList: MenuListInterface<ProductItem[]>[]
+}
 
 const value = ref('')
-const dynamicMenuList = computed(() =>{
-  return menuList.map((item)=> ({
+const props = defineProps<Props>()
+const dynamicList = computed(() =>{
+  return props.menuList.map((item)=> ({
     value: item.id,
     label: item.name
   }))
 })
-
-const selectedMenu = ref(dynamicMenuList.value[0])
+const selectedMenu = ref(dynamicList.value[0])
 
 </script>
 
@@ -19,7 +23,7 @@ const selectedMenu = ref(dynamicMenuList.value[0])
   <div class="">
     <div class="flex flex-col gap-8">
       <MyInput placeholder="Поиск продуктов" v-model="value" />
-      <HorizontalScroll :list="dynamicMenuList" v-model="selectedMenu" />
+      <HorizontalScroll :list="dynamicList" v-model="selectedMenu" />
       <slot :current-tab="selectedMenu.value" :search-word="value" />
 
     </div>

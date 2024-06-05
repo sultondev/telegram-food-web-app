@@ -47,7 +47,7 @@ if(route?.query?.cart && route?.query?.cart.length > 4 && data.value && route.qu
       <div class="mb-8">
         <NuxtImg src="/img/banner.webp" class="w-full rounded-lg" />
       </div>
-      <SearchForm class="mb-12">
+      <SearchForm class="mb-12" :menu-list="menuList">
         <template v-slot="{ currentTab, searchWord }">
           <MenuList v-if="searchWord.length == 0" :menu-list="menuList" :active-tab="currentTab" />
           <SearchResultWrapper v-else :menu-list="menuList" :search-word="searchWord" />
