@@ -84,7 +84,7 @@ const products = computed(() => {
 
                 <div class="flex align-items-center">
                   <RadioButton v-model="paymentType"  inputId="paymentType1" name="Пластиковое карта" value="card" />
-                  <label for="paymentType1" class="ml-2">Пластиковое карта</label>
+                  <label for="paymentType1" class="ml-2">Пластиковая карта</label>
                 </div>
             </div>
             <div class="flex w-1/2 flex-col font-bold mb-3">
@@ -92,10 +92,10 @@ const products = computed(() => {
               <span class="text-orange-500">UZS {{maskedSummary}}</span>
             </div>
             <p class="mb-5">
-              Вы подтверждаете что хотите заказать?
+              Подтверждаете состав заказа?
             </p>
             <Button @click="sendOrder" :unstyled="true" class="w-full bg-orange-400 text-white flex py-2 px-4 rounded-md cursor-pointer h-fit justify-center">
-              Подтвердить
+              Состав верный
             </Button>
           </div>
           <div v-else class="">
